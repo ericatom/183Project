@@ -1,0 +1,77 @@
+.topHeader{
+  height: 80px;
+  width: 100%;
+  background-color: #0a3157;
+  margin: 0;
+  border-radius: 0px;
+}
+
+.title{
+  align-items: center;
+  width: 220px;
+  height: 80px;
+  color: white;
+  padding-top: 15px;
+  padding-left: 30px;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.login{
+  float: right;
+  padding-top: 25px;
+  padding-right: 30px;
+  display: inline-block;
+  position: relative;
+}
+
+.gamecontroller{
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  position: relative;
+  bottom: 10px;
+}
+
+.clear{
+  clear: both;
+}
+
+.customnav{
+  width: 100%;
+  height: 50px;
+  margin: 0;
+}
+
+.navtext{
+  display: inline-block;
+  font-size: 15pt;
+}
+
+.background-image {
+  height: 500px;
+  background-image: url("../images/poly.png");  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.body-text{
+  color: black;
+  background-color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: relative;
+  top: 200px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 40px;
+  text-align: center;
+}
+
+.signup-btn{
+  position: relative;
+  top: 110px;
+  left: 47%;
+  background-color: #0a3157;
+}

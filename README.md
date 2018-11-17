@@ -1,9 +1,8 @@
-# Game Meetup Project
-Online meet up application for gamers. 
+# Playbook
+Online meet up application for gamers.
 
 ## Contributors
 Erica Tom, Jon Montgomery, Khoa Hoang, Peter Jiang
-
 
 ## Technologies Used
 - Github - hosting code
@@ -12,5 +11,3 @@ Erica Tom, Jon Montgomery, Khoa Hoang, Peter Jiang
 - LanguageS: HTML/CSS/Javascript
 
 CMPS 183 with Luca de Alfaro
-
-
