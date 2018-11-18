@@ -254,7 +254,6 @@ a:not(.btn):not(.noeffect):after {
   bottom:-1px;
   width:0;
   height:2px;
-  background-color:#26a69a;
   content:"";
   transition:width 0.2s;
 }

@@ -8,10 +8,10 @@
 
 .title{
   align-items: center;
-  width: 220px;
+  width: 190px;
   height: 80px;
   color: white;
-  padding-top: 15px;
+  padding-top: 20px;
   padding-left: 30px;
   margin: 0 auto;
   display: inline-block;
@@ -50,7 +50,8 @@
 
 .background-image {
   height: 500px;
-  background-image: url("../images/poly.png");  background-repeat: no-repeat;
+  background-image: url("../images/poly.png");
+  background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
@@ -95,4 +96,59 @@
 
 .space{
   height: 75px;
+}
+
+.event-text{
+  padding-top: 40px;
+  text-align: center;
+  color: #0a3157;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+}
+
+.football:hover .overlay {
+  opacity: 1;
+}
+
+.football:hover .football-image {
+  opacity: 0.5;
+}
+
+.controller:hover .overlay {
+  opacity: 1;
+}
+
+.controller:hover .controller-image {
+  opacity: 0.5;
+}
+
+.dice:hover .overlay {
+  opacity: 1;
+}
+
+.dice:hover .dice-image {
+  opacity: 0.5;
+}
+
+.overlay-text {
+  color: #0a3157;
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
