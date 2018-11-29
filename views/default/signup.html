@@ -1,9 +1,12 @@
-<link rel="stylesheet" href="{{=URL('static', 'css/bootstrap.min.css')}}">
+{{extend 'header.html'}}
+
 <link rel="stylesheet" href="{{=URL('static', 'css/stupid.css')}}">
+<link rel="stylesheet" href="{{=URL('static', 'css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{=URL('static', 'css/custom.css')}}">
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>
 
 <form id="registration-info" method="POST">
+  <img class="controller-imageForm" src="{{=URL('static', 'images/category_controller.png')}}">
   <div class="registration-form">
     <h1 style="text-align: center;">Registration Form</h1>
     <p style="text-align: center;">Please fill out information regarding your new Playbook account</p>

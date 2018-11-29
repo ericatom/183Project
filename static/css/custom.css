@@ -33,6 +33,12 @@
   bottom: 10px;
 }
 
+.controller-imageForm{
+  width: 100px;
+  height: auto;
+  padding-top: 30px;
+}
+
 .clear{
   clear: both;
 }
