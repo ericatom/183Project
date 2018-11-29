@@ -20,6 +20,12 @@ def index():
     response.flash = T("Hello World")
     return dict(message=T('Welcome to web2py!'))
 
+def signup():
+    return dict()
+
+def categories():
+    return dict()
+
 
 def user():
     """
@@ -57,5 +63,3 @@ def call():
     supports xml, json, xmlrpc, jsonrpc, amfrpc, rss, csv
     """
     return service()
-
-
