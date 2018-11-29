@@ -75,3 +75,14 @@ CREATE TABLE "web2py_session_Playbook"(
     "session_data" BLOB
 );
 success!
+timestamp: 2018-11-28T17:17:42.718000
+CREATE TABLE "web2py_session_Playbook2"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "locked" CHAR(1),
+    "client_ip" CHAR(64),
+    "created_datetime" TIMESTAMP,
+    "modified_datetime" TIMESTAMP,
+    "unique_key" CHAR(64),
+    "session_data" BLOB
+);
+success!
