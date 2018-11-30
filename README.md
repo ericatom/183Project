@@ -2,7 +2,7 @@
 Online meet up application for gamers.
 
 ## Contributors
-Erica Tom, Jon Montgomery, Khoa Hoang, Peter Jiang
+Erica Tom, Jonathan Montgomery, Khoa Hoang, Peter Jiang
 
 ## Technologies Used
 - Github - hosting code
