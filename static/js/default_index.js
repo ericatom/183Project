@@ -19,7 +19,6 @@ var app = function() {
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
-          message: "",
         },
         methods: {
         }
