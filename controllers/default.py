@@ -26,6 +26,9 @@ def signup():
 def categories():
     return dict()
 
+def events():
+    return dict()
+
 
 def user():
     """

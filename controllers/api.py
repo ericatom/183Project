@@ -1,5 +1,6 @@
 # Here go your api methods.
 
+<<<<<<< Updated upstream
 @auth.requires_signature()
 def add_event():
     id = db.events.insert(
@@ -32,3 +33,6 @@ def get_events_list():
 
     # For homogeneity, we always return a dictionary.
     return response.json(dict(events_list=results))
+=======
+    
+>>>>>>> Stashed changes

@@ -6,8 +6,8 @@
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>
 
 <form id="registration-info" method="POST">
-  <img class="controller-imageForm" src="{{=URL('static', 'images/category_controller.png')}}">
   <div class="registration-form">
+    <img class="controller-imageForm" src="{{=URL('static', 'images/category_controller.png')}}">
     <h1 style="text-align: center;">Registration Form</h1>
     <p style="text-align: center;">Please fill out information regarding your new Playbook account</p>
     <div class="form-spacing">
@@ -15,7 +15,8 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" name="userFirstName" placeholder="Enter First Name">
+            <input type="text" class="form-control" id="firstName" name="userFirstName" v-model="message" placeholder="Enter First Name">
+            <p>Message is: {{ message }}</p>
           </div>
         </div>
         <div class="col-md-6">

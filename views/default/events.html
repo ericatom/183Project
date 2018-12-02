@@ -1,0 +1,35 @@
+{{extend 'header.html'}}
+<link rel="stylesheet" href="{{=URL('static', 'font-awesome-4.6.3/css/font-awesome.min.css')}}">
+<link rel="stylesheet" href="{{=URL('static', 'css/stupid.css')}}">
+<link rel="stylesheet" href="{{=URL('static', 'css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{=URL('static', 'css/custom.css')}}">
+<script src="{{=URL('static', 'js/default_index.js')}}"></script>
+
+<div class="event-menu">
+  <div class="left-side">
+    <h1>Search:</h1>
+    <input class="form-control" type="text" name="search">
+    <button class="btn-sm btn-block btn-success submit-btn" type="submit">Submit</button>
+    <br />
+    <h2>Categories:</h2>
+    <input type="checkbox" name="category-sports">
+    <label for="category-sports">Sports</label> <br />
+    <input type="checkbox" name="category-videogames">
+    <label for="category-videogames">Video Games</label> <br />
+    <input type="checkbox" name="category-boardgames">
+    <label for="category-boardgames">Board Games</label>
+  </div>
+  <div class="right-side">
+    <div class="event-post">
+      <h4>Fortnite</h4>
+      <h5>
+        Looking for 4 players!
+      </h5>
+      <br />
+      <h5>Posted By: Khoa</h5>
+      <h6>Rating: -10 <i class="fa fa-thumbs-down" style="color: white"></i></h6>
+
+      <button class="btn-sm btn-block btn-success submit-btn">Join</button>
+    </div>
+  </div>
+</div>

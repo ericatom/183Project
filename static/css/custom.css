@@ -37,6 +37,8 @@
   width: 100px;
   height: auto;
   padding-top: 30px;
+  margin-left: 46%;
+  margin-right: 35%;
 }
 
 .clear{
@@ -157,4 +159,35 @@
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+}
+
+.event-menu{
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+  display: inline-block;
+}
+
+.left-side{
+  border: 5px solid #0a3157;
+  background-color: #396982;
+  float: left;
+  width: 20%;
+  padding: 10px;
+  color: #F2F9FF;
+}
+
+.right-side{
+  float: right;
+  padding: 10px;
+  width: 80%;
+}
+
+.event-post{
+  border: 5px solid #0a3157;
+  padding: 10px;
+  width: 200px;
+  height: 200;
+  background-color: #396982;
+  color: #F2F9FF;
 }
