@@ -19,8 +19,12 @@ var app = function() {
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
+
         },
         methods: {
+           say: function(message){
+            alert(message)
+           }
         }
 
     });
