@@ -50,8 +50,7 @@ def _():
     # ------------------------------------------------------------------------------------------------------------------
     response.menu += [
         (T('Calendar'), False, '#', [
-            (T(''), False, URL('default', 'entry1')),
-            (T(''), False, URL('default', 'entry2')),
+
         ]),
         (T('Categories'), False, URL('default', 'categories')),
         (T('Events'), False, URL('default', 'events')),
