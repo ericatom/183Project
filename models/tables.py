@@ -30,12 +30,3 @@ db.define_table('events',
                 Field('event_category'),
                 Field("size_limit"),
                 )
-
-db.define_table('users',
-                Field('user_email', default=get_user_email()),
-                Field('user_name'),
-                Field('birthday'),
-                Field("university"),
-                Field("user_password"),
-
-                )

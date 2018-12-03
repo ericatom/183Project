@@ -50,11 +50,13 @@ def _():
     # ------------------------------------------------------------------------------------------------------------------
     response.menu += [
         (T('My Sites'), False, URL('admin', 'default', 'site')),
-        (T('Sample Menu 1'), False, '#', [
-            (T('Entry1'), False, URL('default', 'entry1')),
-            (T('Entry2'), False, URL('default', 'entry2')),
+        (T('Calendar'), False, '#', [
+            (T(''), False, URL('default', 'entry1')),
+            (T(''), False, URL('default', 'entry2')),
         ]),
-        (T('Sample Menu 2'), False, URL('default', 'index'))
+        (T('Events'), False, URL('default', 'index')),
+        (T('My Profile'), False, URL('default', 'index')),
+        (T('About Us'), False, URL('default', 'index'))
     ]
 
 
