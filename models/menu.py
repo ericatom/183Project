@@ -49,13 +49,12 @@ def _():
     # useful links to internal and external resources
     # ------------------------------------------------------------------------------------------------------------------
     response.menu += [
-        (T('My Sites'), False, URL('admin', 'default', 'site')),
         (T('Calendar'), False, '#', [
             (T(''), False, URL('default', 'entry1')),
             (T(''), False, URL('default', 'entry2')),
         ]),
-        (T('Events'), False, URL('default', 'index')),
-        (T('My Profile'), False, URL('default', 'index')),
+        (T('Categories'), False, URL('default', 'categories')),
+        (T('Events'), False, URL('default', 'events')),
         (T('About Us'), False, URL('default', 'index'))
     ]
 
