@@ -1,5 +1,5 @@
 .topHeader{
-  height: 80px;
+  height: 60px;
   width: 100%;
   background-color: #0a3157;
   margin: 0;
@@ -11,7 +11,7 @@
   width: 190px;
   height: 80px;
   color: white;
-  padding-top: 20px;
+  padding-top: 10px;
   padding-left: 30px;
   margin: 0 auto;
   display: inline-block;
@@ -23,6 +23,26 @@
   padding-right: 30px;
   display: inline-block;
   position: relative;
+}
+
+.floatleft{
+
+}
+
+.floatright{
+
+}
+
+.playbooklogo{
+  float:left;
+  margin: 0;
+}
+
+.navitems{
+  padding-top: 20px;
+  float:right;
+  height: 80px;
+  font-size: 15pt;
 }
 
 .gamecontroller{
@@ -61,6 +81,10 @@
   background-image: url("../images/poly.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
+}
+
+.customblue{
+  background-color: #0a3157;
 }
 
 .body-text{
