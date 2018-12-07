@@ -12,28 +12,26 @@
     <link rel="stylesheet" href="{{=URL('static', 'font-awesome-4.6.3/css/font-awesome.min.css')}}">
     {{include "web2py_ajax.html"}}
   </head>
-  <body class="navy">
-    {{if response.flash:}}
-    <div class="w2p_flash">
-      {{=response.flash}}
-    </div>
-    {{pass}}
-    <header class=" padded">
-      <div class="container middle max900">
-        <div class="fill middle">
-          <label class="ham padded fa fa-bars" for="menu"></label>
-          <div class="burger accordion">
-            <input type="checkbox" id="menu"/>
-
-            {{=MENU(response.menu,_class='menu')}}
-            <ul class="menu right">
-              <li>
-                {{=auth.navbar(mode='dropdown')}}
-              </li>
-            </ul>
+  <body class="customblue">
+    <header class="customblue padded">
+        <div class="fill topHeader">
+          <div class="playbooklogo third">
+            <h1 class="title">Playbook</h1>
+            <img class="gamecontroller" src="{{=URL('static', 'images/controller.png')}}">
+          </div>
+          <div class="twothirds navitems">
+            <label class="ham padded fa fa-bars" for="menu"></label>
+            <div class="burger accordion">
+              <input type="checkbox" id="menu"/>
+              {{=MENU(response.menu,_class='menu')}}
+              <ul class="menu right">
+                <li>
+                  {{=auth.navbar(mode='dropdown')}}
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
     </header>
     <main class="white">
       {{include}}
@@ -50,6 +48,7 @@
         </div>
       </div>
     </footer>
+
   </body>
   <script src="{{=URL('static','js/marked.min.js')}}"></script>
   <script src="{{=URL('static','js/vue.min.js')}}"></script>
