@@ -29,6 +29,12 @@ def categories():
 def events():
     return dict()
 
+def calendar():
+    return dict()
+
+def about():
+    return dict()
+
 
 def user():
     """
