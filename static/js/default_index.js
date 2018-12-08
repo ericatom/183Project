@@ -1,5 +1,4 @@
 // This is the js for the default/index.html view.
-
 var app = function() {
 
     var self = {};
@@ -13,27 +12,171 @@ var app = function() {
         }
     };
 
+    // Enumerates an array.
+    var enumerate = function(v) { var k=0; return v.map(function(e) {e._idx = k++;});};
+
+    self.add_post = function () {
+        // We disable the button, to prevent double submission.
+        $.web2py.disableElement($("#add-post"));
+        var sent_title = self.vue.form_title; // Makes a copy
+        var sent_content = self.vue.form_content; //
+        $.post(add_post_url,
+            // Data we are sending.
+            {
+                post_title: self.vue.form_title,
+                post_content: self.vue.form_content,
+            },
+            // What do we do when the post succeeds?
+            function (data) {
+                // Re-enable the button.
+                $.web2py.enableElement($("#add-post"));
+                // Clears the form.
+                self.vue.form_title = "";
+                self.vue.form_content = "";
+                // Adds the post to the list of posts.
+                var new_post = {
+                    id: data.post_id,
+                    post_title: sent_title,
+                    post_content: sent_content,
+                };
+                self.vue.post_list.unshift(new_post);
+                // We re-enumerate the array.
+                self.process_posts();
+            });
+        // If you put code here, it is run BEFORE the call comes back.
+    };
+
+    self.get_posts = function() {
+        $.getJSON(get_post_list_url,
+            function(data) {
+                // I am assuming here that the server gives me a nice list
+                // of posts, all ready for display.
+                self.vue.post_list = data.post_list;
+                // Post-processing.
+                self.process_posts();
+                console.log(self.vue.post_list);
+            }
+        );
+        console.log("I fired the get");
+    };
+
+    self.process_posts = function() {
+        // This function is used to post-process posts, after the list has been modified
+        // or after we have gotten new posts.
+        // We add the _idx attribute to the posts.
+        enumerate(self.vue.post_list);
+        // We initialize the smile status to match the like.
+        self.vue.post_list.map(function (e) {
+            // I need to use Vue.set here, because I am adding a new watched attribute
+            // to an object.  See https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats
+            // The code below is commented out, as we don't have smiles any more.
+            // Replace it with the appropriate code for thumbs.
+            // // Did I like it?
+            // // If I do e._smile = e.like, then Vue won't see the changes to e._smile .
+            // Vue.set(e, '_smile', e.like);
+            Vue.set(e, 'hover', null);
+            Vue.set(e, 'thumb', e.thumb_state);
+        });
+    };
+
+    self.mouseIn = function(post_id) {
+      for (var i=0; i < self.vue.post_list.length; i++) {
+        if (self.vue.post_list[i].id == post_id) {
+          self.vue.post_list[i].hover = null;
+        }
+      }
+    };
+
+
+var insertMovie = function() {
+    var newMovie = {
+        title: app.newMovieTitle,
+        description: app.newMovieDescription,
+        rating: app.newMovieRating
+    };
+    $.post(insert_movie_url, newMovie, function(response) { 
+        newMovie['id'] = response.new_movie_id;
+        newMovie['thumb'] = null; // the new movie should not have a thumb value yet!
+        newMovie['like_count'] = 0; // the like count starts at 0
+        app.movies.push(newMovie);
+        processMovies(); // ned to re-index the movies now that a new one has been added to thea array
+    });
+};
+
+    var updateLikeCountOnScreen = function(idx, id) {
+        var url = get_like_count_url;
+        url += '?post_id=' +id; 
+        $.post(url, function(response) {
+            self.vue.post_list[idx].like_count = response.like_count;
+        });
+    };
+
+    self.handleThumbClick = function(post_id, newThumbState) {
+        var jsThumbValue = newThumbState;
+        var pythonThumbValue = newThumbState;
+        for (var i=0; i < self.vue.post_list.length; i++){
+            if(self.vue.post_list[i].id == post_id){
+                if(self.vue.post_list[i].thumb == newThumbState) {
+                    jsThumbValue = null;
+                    pythonThumbValue = None; // this is the global variable defined at the top. None == undefined
+                }
+                self.vue.post_list[i].thumb = jsThumbValue; // this displays the new thumb on the screen!
+                $.post(set_thumb_url, { 
+                    post_id: self.vue.post_list[i].id, 
+                    thumb_state: pythonThumbValue },
+                    function(response) {
+                    // This is where we tell JS what to do when the web2py server responds. 
+                    updateLikeCountOnScreen(post_id, self.vue.post_list[post_id].id);
+                });
+            }
+        }
+
+    };
+
+    self.mouseOut = function(post_id, thumbState) {
+        for (var i=0; i < self.vue.post_list.length; i++) {
+          if (self.vue.post_list[i].id == post_id) {
+            self.vue.post_list[i].hover = thumbState;
+          }
+        }
+    };
+
     // Complete as needed.
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
-
+            form_title: "",
+            form_content: "",
+            post_list: [],
+            my_bool: false,
         },
         methods: {
-           say: function(message){
-            alert(message)
-           }
+            add_post: self.add_post,
+            mouseLeave: self.mouseIn,
+            hoverThumb: self.mouseOut,
+            clickThumb: self.handleThumbClick
+
         }
 
     });
 
+    // If we are logged in, shows the form to add posts.
+    if (is_logged_in) {
+        $("#add_post").show();
+    }
+
+    // Gets the posts.
+    self.get_posts();
 
     return self;
 };
 
 var APP = null;
+
+// No, this would evaluate it too soon.
+// var APP = app();
 
 // This will make everything accessible from the js console;
 // for instance, self.x above would be accessible as APP.x

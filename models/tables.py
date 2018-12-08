@@ -30,3 +30,11 @@ db.define_table('events',
                 Field('event_category'),
                 Field("size_limit"),
                 )
+
+
+db.define_table('post',
+                Field('post_author', default=get_user_email()),
+                Field('post_title'),
+                Field('post_content', 'text'),
+                Field('post_time', 'datetime', default=get_current_time()),
+                )

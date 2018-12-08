@@ -5,13 +5,25 @@
 <link rel="stylesheet" href="{{=URL('static', 'css/custom.css')}}">
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>
 
+<script>
+    var add_event_url = "{{=URL('api', 'add_event', user_signature=True)}}";
+
+
+
+</script>
+
 <div class="event-menu">
   <div class="left-side">
     <h1>Search:</h1>
     <input class="form-control" type="text" name="search">
     <button class="btn-sm btn-block btn-success submit-btn" type="submit">Submit</button>
 
-    <button v-on:click="say('hi')"> Add Event </button> 
+    <button v-on:click="say('hi')"> Add Event </button>
+
+
+
+
+
 
     <br />
     <h2>Categories:</h2>
@@ -36,3 +48,35 @@
     </div>
   </div>
 </div>
+
+    <div id="vue-div" class="display:none">
+      <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
+      <button id="post-show" v-if="my_bool == true" v-on:click="my_bool = false">Add Post</button>
+      <!-- First, let's add a form to insert blog posts. -->
+      <div id="add_post" v-if="my_bool == false">
+        <div class="container form_row">
+          <div class="label quarter">
+            Title:
+          </div>
+          <div class="form threequarters">
+            <input v-model="form_title" placeholder="Enter the post title"/>
+          </div>
+        </div>
+        <div class="container form_row">
+          <div class="label quarter">
+            Content:
+          </div>
+          <div class="form threequarters">
+            <textarea v-model="form_content" placeholder="Enter the content of your post"></textarea>
+          </div>
+        </div>
+        <div class="container form_row"><div class="quarter"></div>
+          <div class="threequarters">
+            <div class="submit" v-on:click="my_bool = true">
+              <button id="add-post" v-on:click="add_post">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
