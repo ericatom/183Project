@@ -7,6 +7,7 @@
 
 <script>
     var add_event_url = "{{=URL('api', 'add_event', user_signature=True)}}";
+    var get_event_url = "{{=URL('api', 'get_events')}}";
 
 
 
@@ -49,34 +50,37 @@
   </div>
 </div>
 
-    <div id="vue-div" class="display:none">
-      <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
-      <button id="post-show" v-if="my_bool == true" v-on:click="my_bool = false">Add Post</button>
-      <!-- First, let's add a form to insert blog posts. -->
-      <div id="add_post" v-if="my_bool == false">
+
+
+    <br/>
+    <br/>
+    <button v-show="!show_event_form" v-on:click="toggle_form()">Create New Event</button>
+
+
+    <div v-show="show_event_form">
+      <div id="add_event" style="">
         <div class="container form_row">
           <div class="label quarter">
-            Title:
+            Event Title:
           </div>
           <div class="form threequarters">
-            <input v-model="form_title" placeholder="Enter the post title"/>
+            <input v-model="event_title" placeholder="Enter your event title"/>
           </div>
         </div>
         <div class="container form_row">
           <div class="label quarter">
-            Content:
+            Event Description:
           </div>
           <div class="form threequarters">
-            <textarea v-model="form_content" placeholder="Enter the content of your post"></textarea>
+            <textarea v-model="event_description" placeholder="Enter your event description"></textarea>
           </div>
-        </div>
+        </div> 
         <div class="container form_row"><div class="quarter"></div>
           <div class="threequarters">
-            <div class="submit" v-on:click="my_bool = true">
-              <button id="add-post" v-on:click="add_post">Submit</button>
+            <div class="submit">
+              <button id="add-event" v-on:click="add_event(); toggle_form()">Submit</button>
             </div>
           </div>
         </div>
       </div>
-
-
+    </div>

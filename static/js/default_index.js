@@ -15,156 +15,107 @@ var app = function() {
     // Enumerates an array.
     var enumerate = function(v) { var k=0; return v.map(function(e) {e._idx = k++;});};
 
-    self.add_post = function () {
-        // We disable the button, to prevent double submission.
-        $.web2py.disableElement($("#add-post"));
-        var sent_title = self.vue.form_title; // Makes a copy
-        var sent_content = self.vue.form_content; //
-        $.post(add_post_url,
+
+    self.add_event = function () {
+        var to_send_event_title = self.vue.event_title;
+        var to_send_event_description = self.vue.event_description;
+        var to_send_creator_name = self.vue.creator_name;
+        var to_send_creator_email = self.vue.creator_email;
+        var to_send_event_category = "Sports";
+        var to_send_event_description = self.vue.event_description;
+      
+        $.web2py.disableElement($("#add-event"));
+        $.post(add_event_url,
             // Data we are sending.
             {
-                post_title: self.vue.form_title,
-                post_content: self.vue.form_content,
+                event_title: self.vue.event_title,
+                event_description: self.vue.event_description
             },
             // What do we do when the post succeeds?
             function (data) {
-                // Re-enable the button.
-                $.web2py.enableElement($("#add-post"));
+                $.web2py.enableElement($("#add-event"));
                 // Clears the form.
-                self.vue.form_title = "";
-                self.vue.form_content = "";
-                // Adds the post to the list of posts.
-                var new_post = {
-                    id: data.post_id,
-                    post_title: sent_title,
-                    post_content: sent_content,
+                self.vue.event_title = "";
+                self.vue.event_description = "";
+                // Adds the post to the list of posts. 
+                var new_event = {
+                    id: data.event_id,
+                    event_title: to_send_event_title,
+                    event_description: to_send_event_description,
+                    creator_name: to_send_creator_name,
+                    creator_email: to_send_creator_email,
+                    event_category: to_send_event_category,
                 };
-                self.vue.post_list.unshift(new_post);
-                // We re-enumerate the array.
-                self.process_posts();
+               // self.get_events();
             });
         // If you put code here, it is run BEFORE the call comes back.
     };
 
-    self.get_posts = function() {
-        $.getJSON(get_post_list_url,
+/*    self.get_events = function() {
+        $.getJSON(get_house_url,
             function(data) {
                 // I am assuming here that the server gives me a nice list
                 // of posts, all ready for display.
-                self.vue.post_list = data.post_list;
+
+                self.vue.house_list = data.house_list;
+
                 // Post-processing.
-                self.process_posts();
-                console.log(self.vue.post_list);
+                if(data.house_list.length!==0){
+                    self.get_chore_list(data.house_list[0].house_id);
+                    self.get_hmember_list(self.vue.house_list[0].house_id);
+                }
+
             }
         );
         console.log("I fired the get");
     };
 
-    self.process_posts = function() {
+*/
+
+    self.process_events = function() {
         // This function is used to post-process posts, after the list has been modified
         // or after we have gotten new posts.
         // We add the _idx attribute to the posts.
-        enumerate(self.vue.post_list);
+        enumerate(self.vue.chore_list);
         // We initialize the smile status to match the like.
-        self.vue.post_list.map(function (e) {
+        self.vue.chore_list.map(function (e) {
             // I need to use Vue.set here, because I am adding a new watched attribute
             // to an object.  See https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats
-            // The code below is commented out, as we don't have smiles any more.
-            // Replace it with the appropriate code for thumbs.
-            // // Did I like it?
-            // // If I do e._smile = e.like, then Vue won't see the changes to e._smile .
-            // Vue.set(e, '_smile', e.like);
-            Vue.set(e, 'hover', null);
-            Vue.set(e, 'thumb', e.thumb_state);
+             Vue.set(e, 'editing_chore', false);
         });
     };
 
-    self.mouseIn = function(post_id) {
-      for (var i=0; i < self.vue.post_list.length; i++) {
-        if (self.vue.post_list[i].id == post_id) {
-          self.vue.post_list[i].hover = null;
-        }
-      }
-    };
 
 
-var insertMovie = function() {
-    var newMovie = {
-        title: app.newMovieTitle,
-        description: app.newMovieDescription,
-        rating: app.newMovieRating
-    };
-    $.post(insert_movie_url, newMovie, function(response) { 
-        newMovie['id'] = response.new_movie_id;
-        newMovie['thumb'] = null; // the new movie should not have a thumb value yet!
-        newMovie['like_count'] = 0; // the like count starts at 0
-        app.movies.push(newMovie);
-        processMovies(); // ned to re-index the movies now that a new one has been added to thea array
-    });
-};
-
-    var updateLikeCountOnScreen = function(idx, id) {
-        var url = get_like_count_url;
-        url += '?post_id=' +id; 
-        $.post(url, function(response) {
-            self.vue.post_list[idx].like_count = response.like_count;
-        });
-    };
-
-    self.handleThumbClick = function(post_id, newThumbState) {
-        var jsThumbValue = newThumbState;
-        var pythonThumbValue = newThumbState;
-        for (var i=0; i < self.vue.post_list.length; i++){
-            if(self.vue.post_list[i].id == post_id){
-                if(self.vue.post_list[i].thumb == newThumbState) {
-                    jsThumbValue = null;
-                    pythonThumbValue = None; // this is the global variable defined at the top. None == undefined
-                }
-                self.vue.post_list[i].thumb = jsThumbValue; // this displays the new thumb on the screen!
-                $.post(set_thumb_url, { 
-                    post_id: self.vue.post_list[i].id, 
-                    thumb_state: pythonThumbValue },
-                    function(response) {
-                    // This is where we tell JS what to do when the web2py server responds. 
-                    updateLikeCountOnScreen(post_id, self.vue.post_list[post_id].id);
-                });
-            }
-        }
-
-    };
-
-    self.mouseOut = function(post_id, thumbState) {
-        for (var i=0; i < self.vue.post_list.length; i++) {
-          if (self.vue.post_list[i].id == post_id) {
-            self.vue.post_list[i].hover = thumbState;
-          }
-        }
-    };
-
-    // Complete as needed.
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
-            form_title: "",
-            form_content: "",
-            post_list: [],
-            my_bool: false,
+            event_title: "",
+            event_description: "",
+            creator_name: "",
+            creator_email: "",
+            event_category: "",
+            size_limit: 4,
+            show_event_form: false,
+            event_list: [],
+
+
         },
         methods: {
-            add_post: self.add_post,
-            mouseLeave: self.mouseIn,
-            hoverThumb: self.mouseOut,
-            clickThumb: self.handleThumbClick
+            add_event: self.add_event,
+            toggle_form: function(){
+                this.show_event_form = !this.show_event_form;
 
+            },
         }
 
     });
 
     // If we are logged in, shows the form to add posts.
     if (is_logged_in) {
-        $("#add_post").show();
+        $("#add_event").show();
     }
 
     // Gets the posts.
