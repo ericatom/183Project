@@ -1,57 +1,33 @@
-<html lang=en>
-  <head>
-    <meta charset=utf-8>
-    <title>Chatkit demo</title>
-  </head>
-  <body>
-    <ul id="message-list"></ul>
-    <form id="message-form">
-      <input type='text' id='message-text'>
-      <input type="submit">
+{{extend 'layout.html'}}
+
+{{ block content }}
+
+
+  <div id="body">
+    <div id="inbox">
+      {{ for message in messages: }}
+      <pre>{{ =XML(message.me_html) }}</pre>
+      {{ pass }}
+    </div>
+    <div id="input">
+    <form action="{{ =URL('message_new') }}" method="post" id="messageform">
+    <table>
+      <tr>
+        <!--td><input type="text" name="body" id="message" style="width:500px"/></td-->
+    <td><textarea name="body" id="message" style="width:500px;height:100px"></textarea></td>
+        <td style="padding-left:5px" valign="top"><input type="submit" value="Post"/></td>
+      </tr>
+    </table>
     </form>
-
-    <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
-    <script>
-      const tokenProvider = new Chatkit.TokenProvider({
-        url: "https://us1.pusherplatform.io/services/chatkit_token_provider/v1/865a1ad4-32b8-4c78-a6d8-614d1096f809/token"
-      });
-      const chatManager = new Chatkit.ChatManager({
-        instanceLocator: "v1:us1:865a1ad4-32b8-4c78-a6d8-614d1096f809",
-        userId: 1234,
-        tokenProvider: tokenProvider
-      });
-
-      chatManager
-        .connect()
-        .then(currentUser => {
-          currentUser.subscribeToRoom({
-            roomId: currentUser.rooms[0].id,
-            hooks: {
-              onMessage: message => {
-                const ul = document.getElementById("message-list");
-                const li = document.createElement("li");
-                li.appendChild(
-                  document.createTextNode(`${message.senderId}: ${message.text}`)
-                );
-                ul.appendChild(li);
-              }
-            }
-          });
-
-          const form = document.getElementById("message-form");
-          form.addEventListener("submit", e => {
-            e.preventDefault();
-            const input = document.getElementById("message-text");
-            currentUser.sendMessage({
-              text: input.value,
-              roomId: currentUser.rooms[0].id
-            });
-            input.value = "";
-          });
-        })
-        .catch(error => {
-          console.error("error:", error);
-        });
-    </script>
-  </body>
-</html>
+    </div>
+  </div>
+    <!--script src="{{ =URL('static', 'jquery-1.6.2.min.js') }}" type="text/javascript"></script-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  <script>
+        var url_new_message = "{{ =URL('message_new', extension='json', user_signature=True) }}";
+        var url_update_messages = "{{ =URL('message_updates', extension='json', user_signature=True) }}";
+        var url_failed_authorization = "{{ =auth.settings.on_failed_authorization }}";
+  </script>
+  <script src="{{ =URL('static', 'chat.js') }}" type="text/javascript"></script>
+  
+{{ end }}

@@ -7,6 +7,7 @@
 # - user is required for authentication and authorization
 # - download is for downloading files uploaded in the db (does streaming)
 # -------------------------------------------------------------------------
+import chats
 
 
 def index():
@@ -17,8 +18,21 @@ def index():
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
-    response.flash = T("Hello World")
-    return dict(message=T('Welcome to web2py!'))
+    return chats.index(db)
+
+
+#@auth.requires_signature()
+def message_new():
+    return chats.message_new(db)
+
+
+#@auth.requires_signature()
+def message_updates():
+    # need to unlock the session when using
+    # session file, should not be need it when
+    # using session in db, or in a cookie
+    session._unlock(response)
+    return chats.message_updates(db)
 
 def signup():
     return dict()
@@ -30,7 +44,7 @@ def events():
     return dict()
 
 def chat():
-    return dict()
+    return index()
 
 def calendar():
     return dict()
