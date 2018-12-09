@@ -28,6 +28,9 @@ def categories():
 def events():
     return dict()
 
+def aboutus():
+    return dict()
+
 
 def user():
     """

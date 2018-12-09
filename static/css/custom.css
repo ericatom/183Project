@@ -25,6 +25,26 @@
   position: relative;
 }
 
+.padding-login{
+  padding-top: 20px;
+  padding-left: 30px;
+}
+
+.padding-top-bottom{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.profile-pic{
+  width: 200px;
+  height: auto;
+  margin-right: 50px;
+}
+
+.center-this{
+  padding-left: 20%;
+}
+
 .floatleft{
 
 }
@@ -100,6 +120,12 @@
   width: 80%;
   padding: 40px;
   text-align: center;
+}
+
+.about-text{
+  border: 3px solid #f1f1f1;
+  width: 70%;
+  height: auto;
 }
 
 .signup-btn{

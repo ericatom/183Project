@@ -55,7 +55,7 @@ def _():
         ]),
         (T('Categories'), False, URL('default', 'categories')),
         (T('Events'), False, URL('default', 'events')),
-        (T('About Us'), False, URL('default', 'index'))
+        (T('About Us'), False, URL('default', 'aboutus'))
     ]
 
 
