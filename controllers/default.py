@@ -29,6 +29,9 @@ def categories():
 def events():
     return dict()
 
+def chat():
+    return dict()
+
 def calendar():
     return dict()
 

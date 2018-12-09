@@ -13,3 +13,69 @@
   </div>
   <button type="submit" onclick="location.href='{{=URL('default', 'signup')}}'" class="btn-lg btn-success signup-btn">Sign Up</button>
 </div>
+
+
+
+<script type="text/javascript">function add_chatinline(){var hccid=21608053;var nt=document.createElement("script");nt.async=true;nt.src="https://mylivechat.com/chatinline.aspx?hccid="+hccid;var ct=document.getElementsByTagName("script")[0];ct.parentNode.insertBefore(nt,ct);}
+add_chatinline(); </script>
+
+
+<script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
+ 
+<script>const tokenProvider = new Chatkit.TokenProvider({
+  url: "https://us1.pusherplatform.io/services/chatkit_token_provider/v1/865a1ad4-32b8-4c78-a6d8-614d1096f809/token"
+});
+
+const chatManager = new Chatkit.ChatManager({
+  instanceLocator: "v1:us1:865a1ad4-32b8-4c78-a6d8-614d1096f809",
+  userId: 1234,
+  tokenProvider: tokenProvider
+});
+
+chatManager
+  .connect()
+  .then(currentUser => {
+  	currentUser.subscribeToRoom({
+        roomId: currentUser.rooms[0].id,
+        hooks: {
+          onMessage: message => {
+            console.log(`Received new message: ${message.text}`)
+          }
+        }
+      });
+    console.log("Connected as user ", currentUser);
+  })
+  .catch(error => {
+    console.error("error:", error);
+  });
+
+</script>
+
+<!-- container element in which TalkJS will display a chat UI -->
+<div id="talkjs-container" style="width: 90%; margin: 30px; height: 500px"><i>Loading chat...</i></div>
+
+<!-- TalkJS initialization code, which we'll customize in the next steps -->
+<script>
+Talk.ready.then(function() {
+    var me = new Talk.User({
+        id: "123456",
+        name: "Khoa",
+        email: "khoa@example.com",
+    });
+    window.talkSession = new Talk.Session({
+        appId: "t5nOWx6W",
+        me: me
+    });
+    var other = new Talk.User({
+        id: "654321",
+        name: "Jon",
+        email: "jopmontg@ucsc.edu",
+    });
+
+    var conversation = talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other))
+    conversation.setParticipant(me);
+    conversation.setParticipant(other);
+    var inbox = talkSession.createInbox({selected: conversation});
+    inbox.mount(document.getElementById("talkjs-container"));
+});
+</script>
