@@ -34,17 +34,3 @@ db.define_table('events',
 db.define_table('house',
                 Field('house_name'),
                 )
-
-db.define_table('hmember',
-                Field('hmember_email', default=get_user_email()),
-                Field('house_id', 'reference house'),
-                )
-
-db.define_table('chore',
-                Field('chore_author', default=get_user_email()),
-                Field('chore_content', 'text'),
-                Field('house_id', 'reference house'),
-                Field('chore_time', 'datetime', default=get_current_time()),
-                Field('chore_duedate', 'text'),
-                Field('chore_assigneduser', 'text'),
-                )
