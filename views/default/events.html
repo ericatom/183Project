@@ -3,9 +3,74 @@
 <link rel="stylesheet" href="{{=URL('static', 'css/stupid.css')}}">
 <link rel="stylesheet" href="{{=URL('static', 'css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{=URL('static', 'css/custom.css')}}">
+
+{{block head}}
+<script src="{{=URL('static', 'js/vue.js')}}" xmlns:v-on="http://www.w3.org/1999/xhtml"></script>
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>
+<script>
+    var add_post_url = "{{=URL('api', 'add_post', user_signature=True)}}";
+    var get_post_list_url = "{{=URL('api', 'get_post_list')}}";
+    var edit_post_url = "{{=URL('api', 'edit_post', user_signature=True)}}";
+
+    // Reply callbacks.
+    var add_reply_url = "{{=URL('api', 'add_reply', user_signature=True)}}";
+    var get_reply_list_url = "{{=URL('api', 'get_reply_list')}}";
+    var edit_reply_url = "{{=URL('api', 'edit_reply', user_signature=True)}}";
+
+    // Thumb callbacks.
+    var set_thumb_url = "{{=URL('api', 'set_thumb', user_signature=True)}}";
+
+    // Like callbacks.
+    var set_like_url = "{{=URL('api', 'set_like', user_signature=True)}}";
+    var get_likers_url = "{{=URL('api', 'get_likers')}}"
+
+    // Stars.
+    var set_stars_url = "{{=URL('api', 'set_stars', user_signature=True)}}";
+
+    // Authentication
+    var current_user_email = "{{=None if auth.user is None else auth.user.email}}";
+    var is_logged_in = {{='false' if auth.user is None else 'true'}};
+
+    var add_house_url = "{{=URL('api', 'add_house', user_signature=True)}}";
+    var get_chore_list_url = "{{=URL('api', 'get_chore_list')}}";
+    var get_house_url = "{{=URL('api', 'get_house')}}";
+    var add_chore_url = "{{=URL('api', 'add_chore', user_signature=True)}}";
+    var is_in_house_url = "{{=URL('api', 'is_in_house')}}";
+    var add_hmember_url = "{{=URL('api', 'add_hmember', user_signature=True)}}";
+    var get_hmember_list_url = "{{=URL('api', 'get_hmember_list')}}";
+
+    var edit_chore_url = "{{=URL('api', 'edit_chore', user_signature=True)}}";
+    var delete_chore_url =  "{{=URL('api', 'delete_chore', user_signature=True)}}";
+    var delete_hmember_url =  "{{=URL('api', 'delete_hmember', user_signature=True)}}";
+
+</script>
+{{end}}
 
 <div class="event-menu">
+  <div id="vue-div" class="display:none">
+    <div v-show="show_form">
+        <div id="add_house" style="">
+          <div class="container form_row">
+            <div class="label quarter">
+              Title:
+            </div>
+            <div class="form threequarters">
+              <input v-model="form_title" placeholder="Enter your event name"/>
+              <input v-model="form_content" placeholder="Enter your event description"/>
+            </div>
+          </div>
+          <div class="container form_row"><div class="quarter"></div>
+            <div class="threequarters">
+              <div class="submit">
+                <button id="add-house" v-on:click="add_house();toggle_form();">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+
   <div class="left-side">
     <h1>Search:</h1>
     <input class="form-control" type="text" name="search">
@@ -18,6 +83,9 @@
     <label for="category-videogames">Video Games</label> <br />
     <input type="checkbox" name="category-boardgames">
     <label for="category-boardgames">Board Games</label>
+    <br/>
+    <br/>
+    <button v-if="is_logged_in&&house_list.length === 0" v-show="!show_form" v-on:click="toggle_form()">Creaete New Event</button>
   </div>
   <div class="right-side">
     <div class="event-post">
@@ -32,4 +100,5 @@
       <button class="btn-sm btn-block btn-success submit-btn">Join</button>
     </div>
   </div>
+</div>
 </div>
