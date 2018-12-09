@@ -90,8 +90,10 @@ var app = function() {
         data: {
             form_title: "",
             form_content: "",
+            picked: "",
             post_list: [],
             house_list:[],
+
 
             show_form: false,
 

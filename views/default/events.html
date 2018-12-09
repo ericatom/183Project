@@ -57,6 +57,14 @@
             <div class="form threequarters">
               <input v-model="form_title" placeholder="Enter your event name"/>
               <input v-model="form_content" placeholder="Enter your event description"/>
+              <input type="radio" id="one" value="One" v-model="picked">
+              <label for="one">Sports</label>
+              <br>
+              <input type="radio" id="two" value="Two" v-model="picked">
+              <label for="two">Video Games</label>
+              <br>
+              <input type="radio" id="three" value="Three" v-model="picked">
+              <label for="one">Board Games</label>
             </div>
           </div>
           <div class="container form_row"><div class="quarter"></div>
