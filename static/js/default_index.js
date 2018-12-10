@@ -51,7 +51,7 @@ var app = function() {
 
 
     self.get_events = function () {
-        $.getJSON(get_event_list_url,
+        $.getJSON(get_events_list_url,
             function(data) {
                 // I am assuming here that the server gives me a nice list
                 // of posts, all ready for display.
@@ -114,7 +114,7 @@ var app = function() {
                     creator_email: to_send_creator_email,
                     event_category: to_send_event_category,
                 };
-                //self.get_events();
+                self.get_events();
             });
         // If you put code here, it is run BEFORE the call comes back.
     };
@@ -161,7 +161,7 @@ var app = function() {
     if (is_logged_in) {
 
         $("#add_event").show();
-        self.get_house();
+        self.get_events();
 
     }
 

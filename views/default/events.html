@@ -10,7 +10,7 @@
 <script>
     var add_post_url = "{{=URL('api', 'add_post', user_signature=True)}}";
     var get_post_list_url = "{{=URL('api', 'get_post_list')}}";
-    var get_event_list_url = "{{=URL('api', 'get_event_list')}}";
+    var get_events_list_url = "{{=URL('api', 'get_events_list')}}";
     var edit_post_url = "{{=URL('api', 'edit_post', user_signature=True)}}";
 
     // Reply callbacks.
@@ -98,16 +98,27 @@
     <button v-if="is_logged_in" v-show="!display_event_form" v-on:click="toggle_form()">Create New Event</button>
   </div>
   <div class="right-side">
-    <div class="event-post">
-      <h4>Fortnite</h4>
-      <h5>
-        Looking for 4 players!
-      </h5>
-      <br />
-      <h5>Posted By: Khoa</h5>
-      <h6>Rating: -10 <i class="fa fa-thumbs-down" style="color: white"></i></h6>
+    <div class="event-post-list" v-for="event in event_list">
+      <div class="event-poster">
+        <div class="event_content">  
+          <h4> ${event.event_title}; </h4>
+          <h5> ${event.event_content}; </h5>
+          <br />
+          <h5> Posted By: ${event.event_creator_first_name}; </h5>
+          <h6>Rating: -10 <i class="fa fa-thumbs-down" style="color: white"></i></h6>
 
-      <button class="btn-sm btn-block btn-success submit-btn">Join</button>
+
+
+        </div>
+
+
+
+
+
+
+      </div>
+
+
     </div>
   </div>
 </div>
