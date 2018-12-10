@@ -30,7 +30,7 @@ def get_events_list():
             size_limit=row.size_limit,
         ))
     # For homogeneity, we always return a dictionary.
-    return response.json(dict(events_list=results))
+    return response.json(dict(event_list=results))
 
 # Here go your api methods.
 

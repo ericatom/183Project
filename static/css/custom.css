@@ -190,6 +190,7 @@
   padding-right: 20px;
   width: 100%;
   display: inline-block;
+  margin-top: 20px;
 }
 
 .left-side{
@@ -210,8 +211,12 @@
 .event-post{
   border: 5px solid #0a3157;
   padding: 10px;
-  width: 200px;
-  height: 200;
+  width: 1000px !important;
+  height: 200px;
   background-color: #396982;
   color: #F2F9FF;
+}
+
+.left-side{
+  margin-top: 10px;
 }

@@ -58,7 +58,8 @@
             </div>
             <div class="form threequarters">
               <input v-model="event_form_title" placeholder="Enter your event name"/>
-              <input v-model="event_form_content" placeholder="Enter your event description"/>
+              <textarea v-model="event_form_content" placeholder="Enter your event description"></textarea>
+
               <input type="radio" id="one" value="Sports" v-model="event_form_category">
               <label for="one">Sports</label>
               <br>
@@ -72,7 +73,7 @@
           <div class="container form_row"><div class="quarter"></div>
             <div class="threequarters">
               <div class="submit">
-                <button id="add-event" v-on:click="add_event();toggle_form();">Submit</button>
+                <button id="add-event" v-on:click="add_event; toggle_form();">Submit</button>
               </div>
             </div>
           </div>
@@ -85,7 +86,7 @@
     <h1>Search:</h1>
     <input class="form-control" type="text" name="search">
     <button class="btn-sm btn-block btn-success submit-btn" type="submit">Submit</button>
-    <br />
+    <br/>
     <h2>Categories:</h2>
     <input type="checkbox" name="category-sports">
     <label for="category-sports">Sports</label> <br />
@@ -98,9 +99,9 @@
     <button v-if="is_logged_in" v-show="!display_event_form" v-on:click="toggle_form()">Create New Event</button>
   </div>
   <div class="right-side">
-    <div class="event-post-list" v-for="event in event_list">
-      <div class="event-poster">
-        <div class="event_content">  
+    <div class="event-post" v-for="event in event_list">
+
+        <div class="event_content">
           <h4> ${event.event_title}; </h4>
           <h5> ${event.event_content}; </h5>
           <br />
@@ -109,7 +110,7 @@
 
 
 
-        </div>
+
 
 
 
