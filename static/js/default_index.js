@@ -1,4 +1,8 @@
 // This is the js for the default/index.html view.
+var myFunction = function() {
+  alert("You have successfully contacted the event organizer. You will be contacted shortly.");
+};
+
 var app = function() {
 
     var self = {};
@@ -10,6 +14,10 @@ var app = function() {
         for (var i = 0; i < b.length; i++) {
             a.push(b[i]);
         }
+    };
+
+    var myFunction = function() {
+      alert("You have successfully contacted the event organizer. You will be contacted shortly.");
     };
 
     // Enumerates an array.
@@ -113,7 +121,7 @@ var app = function() {
         $.post(add_event_url,
             // Data we are sending.
             {
-              
+
                 event_title: self.vue.event_form_title,
                 event_content: self.vue.event_form_content,
                 creator_email: curr_user_email,
