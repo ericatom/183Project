@@ -58,7 +58,9 @@
             </div>
             <div class="form threequarters">
               <input v-model="event_form_title" placeholder="Enter your event name"/>
-              <input v-model="event_form_content" placeholder="Enter your event description"/>
+              <textarea v-model="event_form_content" placeholder="Enter your event description">  
+
+              </textarea>
               <input type="radio" id="one" value="Sports" v-model="event_form_category">
               <label for="one">Sports</label>
               <br>
