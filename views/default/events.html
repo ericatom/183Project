@@ -10,6 +10,7 @@
 <script>
     var add_post_url = "{{=URL('api', 'add_post', user_signature=True)}}";
     var get_post_list_url = "{{=URL('api', 'get_post_list')}}";
+    var get_event_list_url = "{{=URL('api', 'get_event_list')}}";
     var edit_post_url = "{{=URL('api', 'edit_post', user_signature=True)}}";
 
     // Reply callbacks.
@@ -28,10 +29,11 @@
     var set_stars_url = "{{=URL('api', 'set_stars', user_signature=True)}}";
 
     // Authentication
-    var current_user_email = "{{=None if auth.user is None else auth.user.email}}";
+    var curr_user_email = "{{=None if auth.user is None else auth.user.email}}";
+    var curr_user_first_name = "{{=None if auth.user is None else auth.user.first_name}}";
     var is_logged_in = {{='false' if auth.user is None else 'true'}};
 
-    var add_house_url = "{{=URL('api', 'add_house', user_signature=True)}}";
+    var add_event_url = "{{=URL('api', 'add_event', user_signature=True)}}";
     var get_chore_list_url = "{{=URL('api', 'get_chore_list')}}";
     var get_house_url = "{{=URL('api', 'get_house')}}";
     var add_chore_url = "{{=URL('api', 'add_chore', user_signature=True)}}";
@@ -48,29 +50,29 @@
 
 <div class="event-menu">
   <div id="vue-div" class="display:none">
-    <div v-show="show_form">
-        <div id="add_house" style="">
+    <div v-show="display_event_form">
+        <div id="add_event" style="">
           <div class="container form_row">
             <div class="label quarter">
               Title:
             </div>
             <div class="form threequarters">
-              <input v-model="form_title" placeholder="Enter your event name"/>
-              <input v-model="form_content" placeholder="Enter your event description"/>
-              <input type="radio" id="one" value="One" v-model="picked">
+              <input v-model="event_form_title" placeholder="Enter your event name"/>
+              <input v-model="event_form_content" placeholder="Enter your event description"/>
+              <input type="radio" id="one" value="Sports" v-model="event_form_category">
               <label for="one">Sports</label>
               <br>
-              <input type="radio" id="two" value="Two" v-model="picked">
+              <input type="radio" id="two" value="Video Games" v-model="event_form_category">
               <label for="two">Video Games</label>
               <br>
-              <input type="radio" id="three" value="Three" v-model="picked">
+              <input type="radio" id="three" value="Board Games" v-model="event_form_category">
               <label for="one">Board Games</label>
             </div>
           </div>
           <div class="container form_row"><div class="quarter"></div>
             <div class="threequarters">
               <div class="submit">
-                <button id="add-house" v-on:click="add_house();toggle_form();">Submit</button>
+                <button id="add-event" v-on:click="add_event();toggle_form();">Submit</button>
               </div>
             </div>
           </div>
@@ -93,7 +95,7 @@
     <label for="category-boardgames">Board Games</label>
     <br/>
     <br/>
-    <button v-if="is_logged_in&&house_list.length === 0" v-show="!show_form" v-on:click="toggle_form()">Creaete New Event</button>
+    <button v-if="is_logged_in" v-show="!display_event_form" v-on:click="toggle_form()">Create New Event</button>
   </div>
   <div class="right-side">
     <div class="event-post">

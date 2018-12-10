@@ -14,29 +14,29 @@ var app = function() {
 
     // Enumerates an array.
     var enumerate = function(v) { var k=0; return v.map(function(e) {e._idx = k++;});};
-
+/*
     self.add_post = function () {
         // We disable the button, to prevent double submission.
         $.web2py.disableElement($("#add-post"));
-        var sent_title = self.vue.form_title; // Makes a copy
-        var sent_content = self.vue.form_content; //
+        var sent_title = self.vue.event_form_title; // Makes a copy
+        var sent_content = self.vue.event_form_content; //
         $.post(add_post_url,
             // Data we are sending.
             {
-                post_title: self.vue.form_title,
-                post_content: self.vue.form_content
+                post_title: self.vue.event_form_title,
+                post_content: self.vue.event_form_content
             },
             // What do we do when the post succeeds?
             function (data) {
                 // Re-enable the button.
                 $.web2py.enableElement($("#add-post"));
                 // Clears the form.
-                self.vue.form_title = "";
-                self.vue.form_content = "";
+                self.vue.event_form_title = "";
+                self.vue.event_form_content = "";
                 // Adds the post to the list of posts.
                 var new_post = {
                     id: data.post_id,
-                    post_author: current_user_email,
+                    post_author: curr_user_email,
                     post_title: sent_title,
                     post_content: sent_content
                 };
@@ -47,32 +47,78 @@ var app = function() {
         // If you put code here, it is run BEFORE the call comes back.
     };
 
+*/
 
 
-    self.add_house = function () {
-        var sent_name = self.vue.form_title; // Makes a copy
-        $.web2py.disableElement($("#add-house"));
-        $.post(add_house_url,
+    self.get_events = function () {
+        $.getJSON(get_event_list_url,
+            function(data) {
+                // I am assuming here that the server gives me a nice list
+                // of posts, all ready for display.
+                console.log("event_list: ", data.event_list)
+                self.vue.event_list = data.event_list;
+                console.log("the event", self.vue.event_list);
+                // Post-processing.
+                self.process_events();
+                console.log("I got my list");
+            }
+        );
+        console.log("I fired the get");
+    }
+
+
+    self.process_events = function () {
+        // This function is used to post-process posts, after the list has been modified
+        // or after we have gotten new posts.
+        // We add the _idx attribute to the posts.
+        enumerate(self.vue.event_list);
+        self.vue.event_list.map(function (e) {
+            Vue.set(e, 'editing_event', false);
+
+        });
+
+    };
+
+    self.add_event= function () {
+        var to_send_event_title = self.vue.event_form_title;
+        var to_send_event_content = self.vue.event_form_content;
+        var to_send_creator_name = self.vue.creator_name;
+        var to_send_creator_email = self.vue.creator_email;
+        var to_send_event_category = self.vue.event_form_category;
+      
+        $.web2py.disableElement($("#add-event"));
+        $.post(add_event_url,
             // Data we are sending.
             {
-                house_name: self.vue.form_title,
-                hmember_email: current_user_email
+                event_title: self.vue.event_form_title,
+                event_content: self.vue.event_form_content,
+                creator_email: curr_user_email,
+                creator_name: curr_user_first_name,
+                event_category: self.vue.event_form_category,
+                size_limit: 4
+      
             },
             // What do we do when the post succeeds?
             function (data) {
-            	$.web2py.enableElement($("#add-house"));
+                $.web2py.enableElement($("#add-event"));
                 // Clears the form.
-                self.vue.form_title = "";
-                // Adds the post to the list of posts.
-                var new_house = {
-                    id: data.house_id,
-                    house_name: sent_name,
+                self.vue.event_form_title = "";
+                self.vue.event_form_content = "";
+                self.vue.event_form_category = "";
+                // Adds the post to the list of posts. 
+                var new_event = {
+                    id: data.event_id,
+                    event_title: to_send_event_title,
+                    event_content: to_send_event_content,
+                    creator_name: to_send_creator_name,
+                    creator_email: to_send_creator_email,
+                    event_category: to_send_event_category,
                 };
-
-                self.get_house();
+                //self.get_events();
             });
         // If you put code here, it is run BEFORE the call comes back.
     };
+
 
 
 
@@ -88,23 +134,21 @@ var app = function() {
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
-            form_title: "",
-            form_content: "",
-            picked: "",
+            display_event_form: false,
+            event_form_title: "",
+            event_form_category: "",
+            event_form_content: "",
             post_list: [],
-            house_list:[],
-
-
-            show_form: false,
+            event_list:[],
 
 
         },
         methods: {
             add_post: self.add_post,
             toggle_form: function(){
-                this.show_form = !this.show_form;
+                this.display_event_form = !this.display_event_form;
             },
-            add_house: self.add_house,
+            add_event: self.add_event,
 
 
 
@@ -116,7 +160,7 @@ var app = function() {
     // If we are logged in, shows the form to add posts.
     if (is_logged_in) {
 
-        $("#add_house").show();
+        $("#add_event").show();
         self.get_house();
 
     }
