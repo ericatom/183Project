@@ -58,7 +58,7 @@
             </div>
             <div class="form threequarters">
               <input v-model="event_form_title" placeholder="Enter your event name"/>
-              <textarea v-model="event_form_content" placeholder="Enter your event description"></textarea>
+              <textarea v-model="event_form_content" placeholder="Enter your event description. Max 100 characters"></textarea>
 
               <input type="radio" id="one" value="Sports" v-model="event_form_category">
               <label for="one">Sports</label>
@@ -101,25 +101,13 @@
   <div class="right-side">
     <div class="event-post" v-for="event in event_list">
 
-        <div class="event_content">
+      <div class="event-container">
           <h4> ${event.event_title} </h4>
           <h5> ${event.event_content} </h5>
-          <h5> Cateogry: ${event.event_category} </h5>
-          <br/>
+          <h5> Category: ${event.event_category} </h5>
           <h5> Posted By: ${event.creator_name} </h5>
-          <h6>Rating: -10 <i class="fa fa-thumbs-down" style="color: white"></i></h6>
           <button onclick="myFunction()" >Contact</button>
-
-
-
-
-
-
-
-
-
       </div>
-
 
     </div>
   </div>

@@ -197,7 +197,7 @@
   border: 5px solid #0a3157;
   background-color: #396982;
   float: left;
-  width: 20%;
+  width: 200px;
   padding: 10px;
   color: #F2F9FF;
 }
@@ -210,11 +210,17 @@
 
 .event-post{
   border: 5px solid #0a3157;
-  padding: 10px;
-  width: 1000px !important;
-  height: 225px;
+  width: 700px !important;
+  height: 180px;
   background-color: #396982;
   color: #F2F9FF;
+  margin-bottom: 10px;
+}
+
+.event-container{
+  width: 680px;
+  height: 160px;
+  padding: 10px;
 }
 
 .left-side{
