@@ -14,48 +14,13 @@ var app = function() {
 
     // Enumerates an array.
     var enumerate = function(v) { var k=0; return v.map(function(e) {e._idx = k++;});};
-/*
-    self.add_post = function () {
-        // We disable the button, to prevent double submission.
-        $.web2py.disableElement($("#add-post"));
-        var sent_title = self.vue.event_form_title; // Makes a copy
-        var sent_content = self.vue.event_form_content; //
-        $.post(add_post_url,
-            // Data we are sending.
-            {
-                post_title: self.vue.event_form_title,
-                post_content: self.vue.event_form_content
-            },
-            // What do we do when the post succeeds?
-            function (data) {
-                // Re-enable the button.
-                $.web2py.enableElement($("#add-post"));
-                // Clears the form.
-                self.vue.event_form_title = "";
-                self.vue.event_form_content = "";
-                // Adds the post to the list of posts.
-                var new_post = {
-                    id: data.post_id,
-                    post_author: curr_user_email,
-                    post_title: sent_title,
-                    post_content: sent_content
-                };
-                self.vue.post_list.unshift(new_post);
-                // We re-enumerate the array.
-                self.process_posts();
-            });
-        // If you put code here, it is run BEFORE the call comes back.
-    };
-
-*/
-
 
     self.get_events = function () {
         $.getJSON(get_events_list_url,
             function(data) {
                 // I am assuming here that the server gives me a nice list
                 // of posts, all ready for display.
-                console.log("event_list: ", data.event_list)
+                console.log("event_list: ", data.event_list);
                 self.vue.event_list = data.event_list;
                 console.log("the event", self.vue.event_list);
                 // Post-processing.
@@ -82,8 +47,8 @@ var app = function() {
     self.add_event= function () {
         var to_send_event_title = self.vue.event_form_title;
         var to_send_event_content = self.vue.event_form_content;
-        var to_send_creator_name = self.vue.creator_name;
-        var to_send_creator_email = self.vue.creator_email;
+        var to_send_creator_name = curr_user_first_name;
+        var to_send_creator_email = curr_user_email;
         var to_send_event_category = self.vue.event_form_category;
       
         $.web2py.disableElement($("#add-event"));
@@ -113,8 +78,10 @@ var app = function() {
                     creator_name: to_send_creator_name,
                     creator_email: to_send_creator_email,
                     event_category: to_send_event_category,
+                    size_limit: 4
                 };
-                self.get_events();
+                self.vue.event_list.unshift(new_event);
+                self.process_events();
             });
         // If you put code here, it is run BEFORE the call comes back.
     };
@@ -144,11 +111,12 @@ var app = function() {
 
         },
         methods: {
-            add_post: self.add_post,
             toggle_form: function(){
                 this.display_event_form = !this.display_event_form;
             },
             add_event: self.add_event,
+            process_events: self.process_events,
+            get_events: self.get_events,
 
 
 
@@ -166,7 +134,7 @@ var app = function() {
     }
 
     // Gets the posts.
-    //self.get_posts();
+    self.get_events();
 
     return self;
 };
