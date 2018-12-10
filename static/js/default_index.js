@@ -23,7 +23,7 @@ var app = function() {
 
         });
       };
-
+/*
     self.add_post = function () {
         // We disable the button, to prevent double submission.
         $.web2py.disableElement($("#add-post"));
@@ -50,12 +50,13 @@ var app = function() {
                     post_content: sent_content
                 };
                 self.vue.post_list.unshift(new_post);
+                console.log("event added");
                 // We re-enumerate the array.
                 self.process_posts();
             });
         // If you put code here, it is run BEFORE the call comes back.
     };
-
+*/
 
 
 
@@ -107,11 +108,12 @@ var app = function() {
         var to_send_creator_name = self.vue.creator_name;
         var to_send_creator_email = self.vue.creator_email;
         var to_send_event_category = self.vue.event_form_category;
-
+        console.log("I got my list");
         $.web2py.disableElement($("#add-event"));
         $.post(add_event_url,
             // Data we are sending.
             {
+              
                 event_title: self.vue.event_form_title,
                 event_content: self.vue.event_form_content,
                 creator_email: curr_user_email,
@@ -139,6 +141,7 @@ var app = function() {
 
                 };
                 self.vue.event_list.unshift(new_event);
+                console.log("event added!");
                 self.get_events();
             });
         // If you put code here, it is run BEFORE the call comes back.
@@ -174,7 +177,7 @@ var app = function() {
             toggle_form: function(){
                 this.display_event_form = !this.display_event_form;
             },
-            add_event: self.add_event,
+            add_event: self.add_event
 
 
 
