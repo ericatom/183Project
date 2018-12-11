@@ -34,8 +34,10 @@ def get_events_list():
 
 def get_sports_events_list():
     results = []
+    print("XXXXXXXXXXXXXXXXXXXXXXXXX")
+    print(request.vars.category)
         # User can see events whether they are logged in or not
-    rows = db(db.events.category == 'Sports').select(db.events.ALL, orderby=~db.events.post_time)
+    rows = db(db.events.event_category == "Sports").select(db.events.ALL, orderby=~db.events.post_time)
     for row in rows:
         results.append(dict(
             id=row.id,
@@ -47,12 +49,12 @@ def get_sports_events_list():
             size_limit=row.size_limit,
         ))
     # For homogeneity, we always return a dictionary.
-    return response.json(dict(event_list=results))
+    return response.json(dict(sports_event_list=results))
 
 def get_board_events_list():
     results = []
         # User can see events whether they are logged in or not
-    rows = db(db.events.category == 'Board Games').select(db.events.ALL, orderby=~db.events.post_time)
+    rows = db(db.events.event_category == "Board Games").select(db.events.ALL, orderby=~db.events.post_time)
     for row in rows:
         results.append(dict(
             id=row.id,
@@ -64,12 +66,12 @@ def get_board_events_list():
             size_limit=row.size_limit,
         ))
     # For homogeneity, we always return a dictionary.
-    return response.json(dict(event_list=results))
+    return response.json(dict(board_event_list=results))
 
 def get_video_events_list():
     results = []
         # User can see events whether they are logged in or not
-    rows = db(db.events.category == 'Video Games').select(db.events.ALL, orderby=~db.events.post_time)
+    rows = db(db.events.event_category == "Video Games").select(db.events.ALL, orderby=~db.events.post_time)
     for row in rows:
         results.append(dict(
             id=row.id,
@@ -81,7 +83,7 @@ def get_video_events_list():
             size_limit=row.size_limit,
         ))
     # For homogeneity, we always return a dictionary.
-    return response.json(dict(event_list=results))
+    return response.json(dict(video_event_list=results))
 
 # Here go your api methods.
 

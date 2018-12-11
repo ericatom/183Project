@@ -11,7 +11,7 @@
   <div class="row event-text">
     <div class="col-md-4 football">
       <a href="#">
-        <img class="football-image" src="{{=URL('static', 'images/football.png')}}">
+        <img onclick="location.href='{{=URL('default', 'sportsPage')}}'" class="football-image" src="{{=URL('static', 'images/football.png')}}">
         <div class="overlay">
           <div class="overlay-text">Sports</div>
         </div>
@@ -19,7 +19,7 @@
     </div>
     <div class="col-md-4 controller">
       <a href="#">
-        <img class="controller-image" src="{{=URL('static', 'images/category_controller.png')}}">
+        <img onclick="location.href='{{=URL('default', 'videoPage')}}'" class="controller-image" src="{{=URL('static', 'images/category_controller.png')}}">
         <div class="overlay">
           <div class="overlay-text">Video Games</div>
         </div>
@@ -27,7 +27,7 @@
     </div>
     <div class="col-md-4 dice">
       <a href="#">
-        <img class="dice-image" src="{{=URL('static', 'images/dice.png')}}">
+        <img onclick="location.href='{{=URL('default', 'boardPage')}}'" class="dice-image" src="{{=URL('static', 'images/dice.png')}}">
         <div class="overlay">
           <div class="overlay-text">Board Games</div>
         </div>

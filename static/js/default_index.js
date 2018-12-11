@@ -82,7 +82,7 @@ var app = function() {
             }
         );
         console.log("I fired the get");
-    }
+    };
 
     self.get_sports_events = function () {
         $.getJSON(get_sports_events_list_url,
@@ -98,7 +98,7 @@ var app = function() {
             }
         );
         console.log("I fired the get");
-    }
+    };
 
     self.get_video_events = function () {
         $.getJSON(get_video_events_list_url,
@@ -114,7 +114,7 @@ var app = function() {
             }
         );
         console.log("I fired the get");
-    }
+    };
 
     self.get_board_events = function () {
         $.getJSON(get_board_events_list_url,
@@ -122,7 +122,7 @@ var app = function() {
                 // I am assuming here that the server gives me a nice list
                 // of posts, all ready for display.
                 console.log("event_list: ", data.board_event_list);
-                self.vue.board_event_list = data.baord_event_list;
+                self.vue.board_event_list = data.board_event_list;
                 console.log("the event", self.vue.event_list);
                 // Post-processing.
                 self.process_board_events();
@@ -130,8 +130,7 @@ var app = function() {
             }
         );
         console.log("I fired the get");
-    }
-
+    };
 
 
 
@@ -156,7 +155,7 @@ var app = function() {
 
         });
 
-        //});
+
 
     };
 
@@ -167,10 +166,10 @@ var app = function() {
             // This function is used to post-process posts, after the list has been modified
             // or after we have gotten new posts.
             // We add the _idx attribute to the posts.
-            enumerate(self.vue.sports_events_list);
+            enumerate(self.vue.sports_event_list);
             //self.vue.event_list.map(function (e) {
             //    Vue.set(e, 'editing_event', false
-            self.vue.sports_events_list.map(function (e) {
+            self.vue.sports_event_list.map(function (e) {
                 // I need to use Vue.set here, because I am adding a new watched attribute
                 // to an object.  See https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats
                 // The code below is commented out, as we don't have smiles any more.
@@ -189,10 +188,10 @@ var app = function() {
                 // This function is used to post-process posts, after the list has been modified
                 // or after we have gotten new posts.
                 // We add the _idx attribute to the posts.
-                enumerate(self.vue.board_events_list);
+                enumerate(self.vue.board_event_list);
                 //self.vue.event_list.map(function (e) {
                 //    Vue.set(e, 'editing_event', false
-                self.vue.board_events_list.map(function (e) {
+                self.vue.board_event_list.map(function (e) {
                     // I need to use Vue.set here, because I am adding a new watched attribute
                     // to an object.  See https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats
                     // The code below is commented out, as we don't have smiles any more.
@@ -207,14 +206,14 @@ var app = function() {
                 });
             };
 
-                self.process_video_events = function () {
+            self.process_video_events = function () {
                     // This function is used to post-process posts, after the list has been modified
                     // or after we have gotten new posts.
                     // We add the _idx attribute to the posts.
-                    enumerate(self.vue.video_events_list);
+                    enumerate(self.vue.video_event_list);
                     //self.vue.event_list.map(function (e) {
                     //    Vue.set(e, 'editing_event', false
-                    self.vue.video_events_list.map(function (e) {
+                    self.vue.video_event_list.map(function (e) {
                         // I need to use Vue.set here, because I am adding a new watched attribute
                         // to an object.  See https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats
                         // The code below is commented out, as we don't have smiles any more.
@@ -271,22 +270,25 @@ var app = function() {
 
                 if (to_send_event_category == 'Sports'){
                   self.vue.sports_event_list.unshift(new_event);
-                  self.process_sports_events();
+                  //self.process_sports_events();
                 }
                 else if(to_send_event_category == 'Video Games')
                 {
                   self.vue.video_event_list.unshift(new_event);
-                  self.process_video_events();
+                  //self.process_video_events();
                 }
                 else if(to_send_event_category == 'Board Games')
                 {
                   self.vue.board_event_list.unshift(new_event);
-                  self.process_board_events();
+                  //self.process_board_events();
                 }
                 self.vue.event_list.unshift(new_event);
-                console.log("event added!");
-                console.log(self.vue.sports_event_list);
+
+
                 self.get_events();
+                self.get_sports_events();
+                self.get_video_events();
+                self.get_board_events();
             });
         // If you put code here, it is run BEFORE the call comes back.
 
@@ -336,6 +338,9 @@ var app = function() {
 
         $("#add_event").show();
         self.get_events();
+        self.get_sports_events();
+        self.get_board_events();
+        self.get_video_events();
 
     }
 

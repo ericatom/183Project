@@ -28,6 +28,15 @@ def categories():
 def events():
     return dict()
 
+def sportsPage():
+    return dict()
+
+def boardPage():
+    return dict()
+
+def videoPage():
+    return dict()
+
 
 def user():
     """
