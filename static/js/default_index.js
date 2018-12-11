@@ -105,8 +105,7 @@ var app = function() {
             event_form_title: "",
             event_form_category: "",
             event_form_content: "",
-            post_list: [],
-            event_list:[],
+            event_list: [],
 
 
         },
