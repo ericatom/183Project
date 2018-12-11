@@ -84,6 +84,56 @@ var app = function() {
         console.log("I fired the get");
     }
 
+    self.get_sports_events = function () {
+        $.getJSON(get_sports_events_list_url,
+            function(data) {
+                // I am assuming here that the server gives me a nice list
+                // of posts, all ready for display.
+                console.log("event_list: ", data.sports_event_list);
+                self.vue.sports_event_list = data.sports_event_list;
+                console.log("the event", self.vue.sports_event_list);
+                // Post-processing.
+                self.process_sports_events();
+                console.log("I got my list");
+            }
+        );
+        console.log("I fired the get");
+    }
+
+    self.get_video_events = function () {
+        $.getJSON(get_video_events_list_url,
+            function(data) {
+                // I am assuming here that the server gives me a nice list
+                // of posts, all ready for display.
+                console.log("event_list: ", data.video_event_list);
+                self.vue.video_event_list = data.video_event_list;
+                console.log("the event", self.vue.video_event_list);
+                // Post-processing.
+                self.process_video_events();
+                console.log("I got my list");
+            }
+        );
+        console.log("I fired the get");
+    }
+
+    self.get_board_events = function () {
+        $.getJSON(get_board_events_list_url,
+            function(data) {
+                // I am assuming here that the server gives me a nice list
+                // of posts, all ready for display.
+                console.log("event_list: ", data.board_event_list);
+                self.vue.board_event_list = data.baord_event_list;
+                console.log("the event", self.vue.event_list);
+                // Post-processing.
+                self.process_baord_events();
+                console.log("I got my list");
+            }
+        );
+        console.log("I fired the get");
+    }
+
+
+
 
     self.process_events = function () {
         // This function is used to post-process posts, after the list has been modified
@@ -105,6 +155,93 @@ var app = function() {
 
 
         });
+
+        //});
+
+    };
+
+    self.process_events = function () {
+        // This function is used to post-process posts, after the list has been modified
+        // or after we have gotten new posts.
+        // We add the _idx attribute to the posts.
+        enumerate(self.vue.event_list);
+        //self.vue.event_list.map(function (e) {
+        //    Vue.set(e, 'editing_event', false
+        self.vue.event_list.map(function (e) {
+            // I need to use Vue.set here, because I am adding a new watched attribute
+            // to an object.  See https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats
+            // The code below is commented out, as we don't have smiles any more.
+            // Replace it with the appropriate code for thumbs.
+            // // Did I like it?
+            // // If I do e._smile = e.like, then Vue won't see the changes to e._smile .
+            // Vue.set(e, '_smile', e.like);
+            Vue.set(e, 'editing_event', false)
+
+
+
+        });
+
+
+        self.process_sports_events = function () {
+            // This function is used to post-process posts, after the list has been modified
+            // or after we have gotten new posts.
+            // We add the _idx attribute to the posts.
+            enumerate(self.vue.sports_events_list);
+            //self.vue.event_list.map(function (e) {
+            //    Vue.set(e, 'editing_event', false
+            self.vue.sports_events_list.map(function (e) {
+                // I need to use Vue.set here, because I am adding a new watched attribute
+                // to an object.  See https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats
+                // The code below is commented out, as we don't have smiles any more.
+                // Replace it with the appropriate code for thumbs.
+                // // Did I like it?
+                // // If I do e._smile = e.like, then Vue won't see the changes to e._smile .
+                // Vue.set(e, '_smile', e.like);
+                Vue.set(e, 'editing_event', false)
+
+
+
+            });
+
+            self.process_board_events = function () {
+                // This function is used to post-process posts, after the list has been modified
+                // or after we have gotten new posts.
+                // We add the _idx attribute to the posts.
+                enumerate(self.vue.board_events_list);
+                //self.vue.event_list.map(function (e) {
+                //    Vue.set(e, 'editing_event', false
+                self.vue.board_events_list.map(function (e) {
+                    // I need to use Vue.set here, because I am adding a new watched attribute
+                    // to an object.  See https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats
+                    // The code below is commented out, as we don't have smiles any more.
+                    // Replace it with the appropriate code for thumbs.
+                    // // Did I like it?
+                    // // If I do e._smile = e.like, then Vue won't see the changes to e._smile .
+                    // Vue.set(e, '_smile', e.like);
+                    Vue.set(e, 'editing_event', false)
+
+
+
+                });
+
+                self.process_video_events = function () {
+                    // This function is used to post-process posts, after the list has been modified
+                    // or after we have gotten new posts.
+                    // We add the _idx attribute to the posts.
+                    enumerate(self.vue.video_events_list);
+                    //self.vue.event_list.map(function (e) {
+                    //    Vue.set(e, 'editing_event', false
+                    self.vue.video_events_list.map(function (e) {
+                        // I need to use Vue.set here, because I am adding a new watched attribute
+                        // to an object.  See https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats
+                        // The code below is commented out, as we don't have smiles any more.
+                        // Replace it with the appropriate code for thumbs.
+                        // // Did I like it?
+                        // // If I do e._smile = e.like, then Vue won't see the changes to e._smile .
+                        // Vue.set(e, '_smile', e.like);
+                        Vue.set(e, 'editing_event', false)
+
+                    });
 
         //});
 
@@ -148,8 +285,22 @@ var app = function() {
                     event_category: to_send_event_category,
 
                 };
+
+                if (to_send_event_category == 'Sports'){
+                  self.vue.sports_event_list.unshift(new_event);
+                  process_sports_events()
+                }
+                else if(to_send_event_category == 'Video Games')
+                {
+                  self.vue.video_event_list.unshift(new_event);
+                }
+                else if(to_send_event_category == 'Board Games')
+                {
+                  self.vue.board_event_list.unshift(new_event);
+                }
                 self.vue.event_list.unshift(new_event);
                 console.log("event added!");
+                console.log(self.vue.sports_event_list);
                 self.get_events();
             });
         // If you put code here, it is run BEFORE the call comes back.
@@ -159,10 +310,6 @@ var app = function() {
 
 
 
-    self.edit_chore = function (choreid) {
-        var r = self.vue.chore_list[choreid];
-        r.editing_chore = true;
-    }
 
 
     // Complete as needed.
@@ -176,7 +323,11 @@ var app = function() {
             event_form_category: "",
             event_form_content: "",
             post_list: [],
-            event_list: []
+            event_list: [],
+            sports_event_list: [],
+            video_event_list: [],
+            board_event_list: [],
+
 
 
         },

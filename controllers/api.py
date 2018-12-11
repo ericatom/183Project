@@ -32,6 +32,57 @@ def get_events_list():
     # For homogeneity, we always return a dictionary.
     return response.json(dict(event_list=results))
 
+def get_sports_events_list():
+    results = []
+        # User can see events whether they are logged in or not
+    rows = db(db.events.category == 'Sports').select(db.events.ALL, orderby=~db.events.post_time)
+    for row in rows:
+        results.append(dict(
+            id=row.id,
+            event_title=row.event_title,
+            event_content=row.event_content,
+            creator_name=row.creator_name,
+            creator_email=row.creator_email,
+            event_category=row.event_category,
+            size_limit=row.size_limit,
+        ))
+    # For homogeneity, we always return a dictionary.
+    return response.json(dict(event_list=results))
+
+def get_board_events_list():
+    results = []
+        # User can see events whether they are logged in or not
+    rows = db(db.events.category == 'Board Games').select(db.events.ALL, orderby=~db.events.post_time)
+    for row in rows:
+        results.append(dict(
+            id=row.id,
+            event_title=row.event_title,
+            event_content=row.event_content,
+            creator_name=row.creator_name,
+            creator_email=row.creator_email,
+            event_category=row.event_category,
+            size_limit=row.size_limit,
+        ))
+    # For homogeneity, we always return a dictionary.
+    return response.json(dict(event_list=results))
+
+def get_video_events_list():
+    results = []
+        # User can see events whether they are logged in or not
+    rows = db(db.events.category == 'Video Games').select(db.events.ALL, orderby=~db.events.post_time)
+    for row in rows:
+        results.append(dict(
+            id=row.id,
+            event_title=row.event_title,
+            event_content=row.event_content,
+            creator_name=row.creator_name,
+            creator_email=row.creator_email,
+            event_category=row.event_category,
+            size_limit=row.size_limit,
+        ))
+    # For homogeneity, we always return a dictionary.
+    return response.json(dict(event_list=results))
+
 # Here go your api methods.
 
 @auth.requires_signature()

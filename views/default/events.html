@@ -34,16 +34,13 @@
     var is_logged_in = {{='false' if auth.user is None else 'true'}};
 
     var add_event_url = "{{=URL('api', 'add_event', user_signature=True)}}";
-    var get_chore_list_url = "{{=URL('api', 'get_chore_list')}}";
-    var get_house_url = "{{=URL('api', 'get_house')}}";
-    var add_chore_url = "{{=URL('api', 'add_chore', user_signature=True)}}";
-    var is_in_house_url = "{{=URL('api', 'is_in_house')}}";
-    var add_hmember_url = "{{=URL('api', 'add_hmember', user_signature=True)}}";
-    var get_hmember_list_url = "{{=URL('api', 'get_hmember_list')}}";
 
-    var edit_chore_url = "{{=URL('api', 'edit_chore', user_signature=True)}}";
-    var delete_chore_url =  "{{=URL('api', 'delete_chore', user_signature=True)}}";
-    var delete_hmember_url =  "{{=URL('api', 'delete_hmember', user_signature=True)}}";
+
+    var get_sports_events_list_url = "{{=URL('api', 'get_sports_events_list', user_signature=True)}}";
+    var get_board_events_list_url = "{{=URL('api', get_board_events_list', user_signature=True)}}";
+    var get_video_events_list_url = "{{=URL('api', 'get_video_events_list', user_signature=True)}}";
+
+
 
 </script>
 {{end}}
@@ -109,7 +106,6 @@
           <h5> Posted By: ${event.creator_name} </h5>
           <h6>Rating: -10 <i class="fa fa-thumbs-down" style="color: white"></i></h6>
           <button onclick="myFunction()" >Contact</button>
-
 
 
 
