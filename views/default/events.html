@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="{{=URL('static', 'css/custom.css')}}">
 
 {{block head}}
-<script src="{{=URL('static', 'js/vue.js')}}" xmlns:v-on="http://www.w3.org/1999/xhtml"></script>
+<script src="{{=URL('static', 'js/vue.js')}}"></script>
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>
 <script>
     var add_post_url = "{{=URL('api', 'add_post', user_signature=True)}}";
@@ -39,9 +39,6 @@
     var get_sports_events_list_url = "{{=URL('api', 'get_sports_events_list', user_signature=True)}}";
     var get_board_events_list_url = "{{=URL('api', get_board_events_list', user_signature=True)}}";
     var get_video_events_list_url = "{{=URL('api', 'get_video_events_list', user_signature=True)}}";
-
-
-
 </script>
 {{end}}
 

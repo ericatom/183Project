@@ -125,7 +125,7 @@ var app = function() {
                 self.vue.board_event_list = data.baord_event_list;
                 console.log("the event", self.vue.event_list);
                 // Post-processing.
-                self.process_baord_events();
+                self.process_board_events();
                 console.log("I got my list");
             }
         );
@@ -160,26 +160,7 @@ var app = function() {
 
     };
 
-    self.process_events = function () {
-        // This function is used to post-process posts, after the list has been modified
-        // or after we have gotten new posts.
-        // We add the _idx attribute to the posts.
-        enumerate(self.vue.event_list);
-        //self.vue.event_list.map(function (e) {
-        //    Vue.set(e, 'editing_event', false
-        self.vue.event_list.map(function (e) {
-            // I need to use Vue.set here, because I am adding a new watched attribute
-            // to an object.  See https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats
-            // The code below is commented out, as we don't have smiles any more.
-            // Replace it with the appropriate code for thumbs.
-            // // Did I like it?
-            // // If I do e._smile = e.like, then Vue won't see the changes to e._smile .
-            // Vue.set(e, '_smile', e.like);
-            Vue.set(e, 'editing_event', false)
 
-
-
-        });
 
 
         self.process_sports_events = function () {
@@ -202,8 +183,9 @@ var app = function() {
 
 
             });
+        };
 
-            self.process_board_events = function () {
+        self.process_board_events = function () {
                 // This function is used to post-process posts, after the list has been modified
                 // or after we have gotten new posts.
                 // We add the _idx attribute to the posts.
@@ -223,6 +205,7 @@ var app = function() {
 
 
                 });
+            };
 
                 self.process_video_events = function () {
                     // This function is used to post-process posts, after the list has been modified
@@ -288,15 +271,17 @@ var app = function() {
 
                 if (to_send_event_category == 'Sports'){
                   self.vue.sports_event_list.unshift(new_event);
-                  process_sports_events()
+                  self.process_sports_events();
                 }
                 else if(to_send_event_category == 'Video Games')
                 {
                   self.vue.video_event_list.unshift(new_event);
+                  self.process_video_events();
                 }
                 else if(to_send_event_category == 'Board Games')
                 {
                   self.vue.board_event_list.unshift(new_event);
+                  self.process_board_events();
                 }
                 self.vue.event_list.unshift(new_event);
                 console.log("event added!");
@@ -336,7 +321,8 @@ var app = function() {
             toggle_form: function(){
                 this.display_event_form = !this.display_event_form;
             },
-            add_event: self.add_event
+            add_event: self.add_event,
+
 
 
 
@@ -352,6 +338,7 @@ var app = function() {
         self.get_events();
 
     }
+
 
     // Gets the posts.
     //self.get_posts();
