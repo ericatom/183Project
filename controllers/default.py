@@ -18,6 +18,7 @@ def index():
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
+
     return chats.index(db)
 
 
@@ -33,6 +34,7 @@ def message_updates():
     # using session in db, or in a cookie
     session._unlock(response)
     return chats.message_updates(db)
+    return dict(message=T('Welcome to web2py!'))
 
 def signup():
     return dict()
@@ -43,13 +45,23 @@ def categories():
 def events():
     return dict()
 
+
 def chat():
     return index()
 
 def calendar():
+  return dict()
+
+def aboutus():
     return dict()
 
-def about():
+def sportsPage():
+    return dict()
+
+def boardPage():
+    return dict()
+
+def videoPage():
     return dict()
 
 

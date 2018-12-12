@@ -23,17 +23,8 @@ db.define_table('events',
                 Field('creator_email', default=get_user_email()),
                 Field('creator_name'),
                 Field('event_title'),
-                Field('event_description', 'text'),
+                Field('event_content', 'text'),
                 Field('post_time', 'datetime', default=get_current_time()),
                 Field('event_category'),
                 Field("size_limit"),
-                )
-
-db.define_table('users',
-                Field('user_email', default=get_user_email()),
-                Field('user_name'),
-                Field('birthday'),
-                Field("university"),
-                Field("user_password"),
-
                 )
