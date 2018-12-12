@@ -61,7 +61,7 @@ response.form_label_separator = myconf.get('forms.separator') or ''
 from gluon.tools import Auth, Service, PluginManager
 
 # host names must be a list of allowed host names (glob syntax allowed)
-auth = Auth(db, host_names=myconf.get('host.names'))
+auth = Auth(db)
 service = Service()
 plugins = PluginManager()
 
@@ -80,6 +80,12 @@ mail.settings.ssl = myconf.get('smtp.ssl') or False
 auth.settings.registration_requires_verification = False
 auth.settings.registration_requires_approval = False
 auth.settings.reset_password_requires_verification = True
+
+db.define_table('chat',
+        Field('me_from'),
+        Field('me_body', 'text'),
+        Field('me_html', 'text'),
+        )
 
 # More API examples for controllers:
 #

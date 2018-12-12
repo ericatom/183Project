@@ -7,9 +7,6 @@
 # There is an implicit 'id integer autoincrement' field
 # Consult manual for more options, validators, etc.
 
-
-
-
 # after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
 
@@ -20,6 +17,7 @@ def get_user_email():
 
 def get_current_time():
     return datetime.datetime.utcnow()
+
 
 db.define_table('events',
                 Field('creator_email', default=get_user_email()),
