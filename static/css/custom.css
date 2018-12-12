@@ -211,12 +211,24 @@
 .event-post{
   border: 5px solid #0a3157;
   padding: 10px;
-  width: 1000px !important;
-  height: 225px;
+  width: 475px !important;
+  height: 250px;
   background-color: #396982;
   color: #F2F9FF;
 }
 
 .left-side{
-  margin-top: 10px;
+  margin-right: 15px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 475px 475px;
+  grid-gap: 10px;
+  background-color: #fff;
+  color: #444;
+}
+
+.myContainer {
+  padding: 10px;
 }
