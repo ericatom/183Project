@@ -237,10 +237,16 @@
 .event-post{
   border: 5px solid #0a3157;
   padding: 10px;
-  width: 475px !important;
+  margin-bottom: 10px;
+  width: 350px !important;
   height: 250px;
   background-color: #396982;
   color: #F2F9FF;
+}
+
+.create-post-btn{
+  background-color: #0a3157;
+  margin-bottom: 10px;
 }
 
 .left-side{
@@ -249,7 +255,7 @@
 
 .wrapper {
   display: grid;
-  grid-template-columns: 475px 475px;
+  grid-template-columns: 350px 350px 350px;
   grid-gap: 10px;
   background-color: #fff;
   color: #444;

@@ -76,46 +76,18 @@
           </div>
         </div>
     </div>
+    <button class="btn-lg btn-success create-post-btn" v-if="is_logged_in" v-show="!display_event_form" v-on:click="toggle_form()">Create New Event</button>
 
-
-
-  <div class="left-side">
-    <h1>Search:</h1>
-    <input class="form-control" type="text" name="search">
-    <button class="btn-sm btn-block btn-success submit-btn" type="submit">Submit</button>
-    <br/>
-    <h2>Categories:</h2>
-    <input type="checkbox" name="category-sports">
-    <label for="category-sports">Sports</label> <br />
-    <input type="checkbox" name="category-videogames">
-    <label for="category-videogames">Video Games</label> <br />
-    <input type="checkbox" name="category-boardgames">
-    <label for="category-boardgames">Board Games</label>
-    <br/>
-    <br/>
-    <button v-if="is_logged_in" v-show="!display_event_form" v-on:click="toggle_form()">Create New Event</button>
-  </div>
   <div class="wrapper">
     <div class="event-post" v-for="event in sports_event_list">
-
         <div class="event_content">
           <h4> ${event.event_title} </h4>
           <h5> ${event.event_content} </h5>
-          <h5> Cateogry: ${event.event_category} </h5>
+          <h5> Category: ${event.event_category} </h5>
           <br/>
           <h5> Posted By: ${event.creator_name} </h5>
           <h6>Rating: -10 <i class="fa fa-thumbs-down" style="color: white"></i></h6>
           <button onclick="myFunction()" >Contact</button>
-
-
-
-
-
-
-
-
       </div>
-
-
     </div>
   </div>
